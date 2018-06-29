@@ -14,7 +14,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-@Module
+@Module(subcomponents = [GlideComponent::class])
 internal object AppModule {
     @Singleton
     @Provides

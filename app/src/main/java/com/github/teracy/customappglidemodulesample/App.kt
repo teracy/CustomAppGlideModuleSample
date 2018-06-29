@@ -1,5 +1,7 @@
 package com.github.teracy.customappglidemodulesample
 
+import com.github.teracy.customappglidemodulesample.data.CustomAppGlideModule
+import com.github.teracy.customappglidemodulesample.di.AppComponent
 import com.github.teracy.customappglidemodulesample.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
@@ -17,5 +19,9 @@ class App : DaggerApplication() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+    }
+
+    fun inject(appGlideModule: CustomAppGlideModule) {
+        (applicationInjector() as AppComponent).glideComponentBuilder().build().inject(appGlideModule)
     }
 }
