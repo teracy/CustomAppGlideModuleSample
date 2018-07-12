@@ -8,10 +8,14 @@ import dagger.android.support.DaggerApplication
 import timber.log.Timber
 
 class App : DaggerApplication() {
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent.builder()
+    private val component: AppComponent by lazy {
+        DaggerAppComponent.builder()
                 .application(this)
                 .build()
+    }
+
+    override fun applicationInjector(): AndroidInjector<App> {
+        return component
     }
 
     override fun onCreate() {
@@ -22,6 +26,6 @@ class App : DaggerApplication() {
     }
 
     fun inject(appGlideModule: CustomAppGlideModule) {
-        (applicationInjector() as AppComponent).glideComponentBuilder().build().inject(appGlideModule)
+        component.glideComponentBuilder().build().inject(appGlideModule)
     }
 }
